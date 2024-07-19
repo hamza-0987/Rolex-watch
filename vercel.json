@@ -1,0 +1,36 @@
+{
+    
+    "version": 2,
+  
+   
+    "builds": [
+      {
+       
+        "src": "requirements.txt",
+        "use": "@vercel/python",
+     
+        "config": {"maxLambdaSize": "50mb"}
+      }
+    ],
+  
+    
+    "routes": [
+      {
+       
+        "src": "/(.*)",
+        "dest": "website/wsgi.py",
+        "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+      }
+    ],
+  
+   
+  
+   
+    "regions": ["all"],
+    
+   
+    "buildEnv": {
+      "PYTHON_VERSION": "3.8"
+    }
+  }
+  
