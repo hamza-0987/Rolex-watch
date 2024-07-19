@@ -1,22 +1,29 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "requirements.txt",
-      "use": "@vercel/python",
-      "config": {"maxLambdaSize": "50mb"}
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "website/wsgi.py",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    }
-  ],
-  "env": {
-    "DEBUG": "false"
-  },
-  "regions": ["all"],
+    "version": 2,
+    "builds": [
+      {
+        "src": "website/wsgi.py",
+        "use": "@vercel/python"
+      },
+      {
+        "src": "requirements.txt",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "staticfiles_build",
+          "runtime": "python3.8"
+        }
+      }
+    ],
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/"
+          }
+      {
+        "src": "/(.*)",
+        "dest": "website/wsgi.py"
+      }
+    ]
+    
+  }
   
-}
