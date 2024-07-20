@@ -4,25 +4,25 @@
     {
       "src": "requirements.txt",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "50mb" }
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
     }
   ],
   "routes": [
     {
       "src": "/static/(.*)",
-      "headers": { "cache-control": "s-maxage=31536000,immutable" },
+      "headers": { "cache-control": "s-maxage=31536000, immutable" },
       "dest": "/static/$1"
     },
     {
       "src": "/media/(.*)",
-      "headers": { "cache-control": "s-maxage=31536000,immutable" },
+      "headers": { "cache-control": "s-maxage=31536000, immutable" },
       "dest": "/media/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "website.asgi:application"
+      "dest": "website.wsgi:application"
     }
-  ],
-  
-  }
+  ]
 }
