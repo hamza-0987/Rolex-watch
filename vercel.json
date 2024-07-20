@@ -4,42 +4,25 @@
     {
       "src": "requirements.txt",
       "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "50mb"
-      }
+      "config": { "maxLambdaSize": "50mb" }
     }
   ],
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "static/$1"
+      "headers": { "cache-control": "s-maxage=31536000,immutable" },
+      "dest": "/static/$1"
     },
     {
       "src": "/media/(.*)",
-      "dest": "media/$1"
+      "headers": { "cache-control": "s-maxage=31536000,immutable" },
+      "dest": "/media/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "website.wsgi.application",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+      "dest": "website.asgi:application"
     }
   ],
-  "env": {
-    "DJANGO_SECRET_KEY": {
-      "type": "secret",
-      "value": "django-insecure-@bkj!*j#8-+td02b#-)8kndzl7fozdxd-m)l9yd=dzmtr_+=rt"
-    },
-    "DEBUG": "true",
-    "EMAIL_BACKEND": "django.core.mail.backends.smtp.EmailBackend",
-    "EMAIL_HOST": "smtp.gmail.com",
-    "EMAIL_PORT": "587",
-    "EMAIL_USE_TLS": "true",
-    "EMAIL_HOST_USER": "djangopractice49@gmail.com",
-    "EMAIL_HOST_PASSWORD": "kmjr dqaz tlob ghyj"
-    // Add other environment variables as needed
-  },
-  "regions": ["all"],
-  "buildEnv": {
-    "PYTHON_VERSION": "3.8"
+  
   }
 }
